@@ -24,13 +24,13 @@ This section contains the following topics:
 
 > 1- Create and Set Up an Internal CA (OpenSSL)  
 > 1-1- Create a signing CA Trust key and certificate _master node: hdp-1_    
-Files needed:
-- None
-Files created:
-- ca.key
-- ca.cert
-Files updated:
-- None
+Files needed:  
+- None  
+Files created:  
+- ca.key  
+- ca.cert  
+Files updated:  
+- None  
 The certificate will have an expiration date 10 years (3650 days) into the future. Keep these files in this secure directory as they are the basis of the trust structure.
 
 ```sh
@@ -50,7 +50,7 @@ openssl req -new -x509 -keyout ca-key -out ca-cert -days 3650
 
 ```
 
-> 1-2- Create key and keystore for each node in your cluster  
+> 1-2- Create key and keystore for each node in your cluster    
 Files needed:
 - None
 Files created:
