@@ -121,7 +121,50 @@ keytool -list -v -keystore keystore.jks
 
 ```
 
+> Setup
 
+```sh
+# set up the CA directory structure
+mkdir -m 0700 /root/CA /root/CA/certs /root/CA/crl /root/CA/newcerts /root/CA/private
+
+# Move the CA key to  /root/CA/private  and the CA certificate to  /root/CA/certs
+mv ca.key /root/CA/private;mv ca.crt /root/CA/certs
+
+# Add required files:
+touch /root/CA/index.txt; echo 1000 >> /root/CA/serial 
+
+# Set permissions on the ca.key
+chmod 0400 /root/ca/private/ca.key
+
+# Open the OpenSSL configuration file
+vi /etc/pki/tls/openssl.cnf
+
+# Change the directory paths to match your environment
+## START ##
+## [ CA_default ]
+## 
+## dir             = /root/CA                  # Where everything is kept
+## certs           = /root/CA/certs            # Where the issued certs are kept
+## crl_dir         = /root/CA/crl              # Where the issued crl are kept
+## database        = /root/CA/index.txt        # database index file.
+## #unique_subject = no                        # Set to 'no' to allow creation of
+##                                             # several certificates with same subject.
+## new_certs_dir   = /root/CA/newcerts         # default place for new certs.
+## 
+## certificate     = /root/CA/cacert.pem       # The CA certificate
+## serial          = /root/CA/serial           # The current serial number
+## crlnumber       = /root/CA/crlnumber        # the current crl number
+##                                             # must be commented out to leave a V1 CRL
+## crl             = $dir/crl.pem               # The current CRL
+## private_key     = /root/CA/private/cakey.pem # The private key
+## RANDFILE        = /root/CA/private/.rand     # private random number file
+## 
+## x509_extensions = usr_cert              # The extensions to add to the cert
+##
+## END ##
+# Save the changes and restart OpenSSL
+
+```
 
 > Set Up SSL for Ambari
 
