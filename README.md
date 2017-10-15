@@ -24,6 +24,7 @@ This section contains the following topics:
 
 > 1- Create and Set Up an Internal CA (OpenSSL)  
 > 1-1- Create a signing CA Trust key and certificate _master node: hdp-1_    
+
 Files needed:  
 - None  
 Files created:  
@@ -51,16 +52,17 @@ openssl req -new -x509 -keyout ca-key -out ca-cert -days 3650
 ```
 
 > 1-2- Create key and keystore for each node in your cluster    
-Files needed:
+
+Files needed:  
 - None
-Files created:
+Files created:  
 - keystore-1.jks
 - keystore-2.jks
 - keystore-3.jks
 - hdp-1.cert-req.csr
 - hdp-2.cert-req.csr
 - hdp-3.cert-req.csr
-Files updated:
+Files updated:  
 - keystore.jks
 
 ```sh
@@ -76,17 +78,18 @@ keytool -keystore keystore-3.jks -alias hdp-1 -certreq -file hdp-3-cert-req.csr
 ```
 
 > 1-3- Create a signed certificate using the client CSR file
+
 Files needed:  
 - hdp-1-cert-req.csr (created above)
 - hdp-2-cert-req.csr (created above)
 - hdp-3-cert-req.csr (created above)
 - ca.key (created above)
 - ca.cert (created above)
-Files created:
+Files created:  
 - hdp-1-signed-cert.crt
 - hdp-1-signed-cert.crt
 - hdp-1-signed-cert.crt
-Files updated:
+Files updated:  
 - None
 
 ```sh
@@ -96,14 +99,15 @@ openssl x509 -req -CA ca.cert -CAkey ca.key -in hdp-3-cert-req.csr -out hdp-3-si
 ```
 
 > 1-4- Acting as the client requesting a signed certificate, import the certificate signed by Signing Authority above into your keystore  
-Files needed:
+
+Files needed:  
 - ca.cert (created above)
 - hdp-1-signed-cert.crt (created above)
 - hdp-2-signed-cert.crt (created above)
 - hdp-3-signed-cert.crt (created above)
-Files created:
+Files created:  
 - None
-Files updated:
+Files updated:  
 - keystore.jks
 
 ```sh
