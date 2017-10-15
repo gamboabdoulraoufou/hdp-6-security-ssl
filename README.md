@@ -54,27 +54,25 @@ openssl req -new -x509 -keyout ca-key -out ca-cert -days 3650
 > 1-2- Create key and keystore for each node in your cluster    
 
 Files needed:  
-- None
-Files created:  
-- keystore-1.jks
-- keystore-2.jks
-- keystore-3.jks
+- None  
+Files created:    
+- keystore.jks  
 - hdp-1.cert-req.csr
 - hdp-2.cert-req.csr
-- hdp-3.cert-req.csr
+- hdp-3.cert-req.csr  
 Files updated:  
-- keystore.jks
+- keystore.jks  
 
 ```sh
 # generate the key and certificate for a component process
-keytool -keystore keystore-1.jks -alias hdp-1 -validity 730 -genkey
-keytool -keystore keystore-2.jks -alias hdp-2 -validity 730 -genkey
-keytool -keystore keystore-3.jks -alias hdp-3 -validity 730 -genkey
+keytool -keystore keystore.jks -alias hdp-1 -validity 730 -genkey
+keytool -keystore keystore.jks -alias hdp-2 -validity 730 -genkey
+keytool -keystore keystore.jks -alias hdp-3 -validity 730 -genkey
 
 # add the generated CA to the server's truststore
-keytool -keystore keystore-1.jks -alias hdp-1 -certreq -file hdp-1-cert-req.csr
-keytool -keystore keystore-2.jks -alias hdp-1 -certreq -file hdp-2-cert-req.csr
-keytool -keystore keystore-3.jks -alias hdp-1 -certreq -file hdp-3-cert-req.csr
+keytool -keystore keystore.jks -alias hdp-1 -certreq -file hdp-1-cert-req.csr
+keytool -keystore keystore.jks -alias hdp-1 -certreq -file hdp-2-cert-req.csr
+keytool -keystore keystore.jks -alias hdp-1 -certreq -file hdp-3-cert-req.csr
 ```
 
 > 1-3- Create a signed certificate using the client CSR file
